@@ -53,7 +53,7 @@ include_once 'header.php';
                     <tr>
                         <td><b>Order Information</b></td>
                         <td>
-                            OrderID : <?=(int)$orderInfo->ID?><br />
+                            OrderID : <?=(int)$orderInfo->Order_ID?><br />
                             Booking Ref : <?=(int)$orderInfo->Booking_Reference?><br />                            
                             
                         </td>
