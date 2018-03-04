@@ -1,6 +1,6 @@
 <?php
-//define("hostname", "http://localhost/tstnew/");
-define("hostname", "http://travelshoptours.com/apiv2/");
+define("hostname", "http://localhost/tstnew/");
+//define("hostname", "http://travelshoptours.com/apiv2/");
 function convert_currency($amount, $baseCurrency, $convertTo, $rates){
     $symbol = strtoupper($baseCurrency)."_".strtoupper($convertTo);
         

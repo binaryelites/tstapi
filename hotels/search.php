@@ -11,6 +11,7 @@ $request = $Hotels->search($params);
 
 
 if($request['success'] == false):
+    d($request);
     echo $request['msg'];
     die();
 endif;
@@ -23,14 +24,19 @@ include_once 'header.php';
 // Check what we received
 try {
     $result = simplexml_load_string($request['data']);
-    $count = count($result->item);
+    $count = count($result->hotels->item);
     if($count > 0)
     {
 ?>
         <div class="col-sm-12 col-xs-12"><h1 class="well text-center"><?=$count?> Result found</h1></div>
-        
+        <small>
+            <pre>
+                Profiler TST: <?=(string)$result->profiler->tst?><br />
+                Profiler JAC: <?=(string)$result->profiler->jac?>
+            </pre>
+        </small>
     <?php
-        foreach($result->item as $h)
+        foreach($result->hotels->item as $h)
         {   
     ?>
         <div class="col-sm-12 col-md-12 col-xs-12">

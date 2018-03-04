@@ -1,0 +1,13 @@
+{
+    "name": "vendor/tstapi",
+    "description": "Description of project tstapi.",
+    "authors": [
+        {
+            "name": "Arif",
+            "email": "arif_avi@hotmail.here"
+        }
+    ],
+    "require": {
+        "jaybizzle/crawler-detect" :"1.*"
+    }
+}

@@ -1,5 +1,5 @@
 <?php
-
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 /**
  * Description of Hotels
  * Search, Show, Book and Cancel Hotel Bookings
@@ -20,6 +20,7 @@ class Hotels
         
         include_once '../src/config.php';
         
+        include_once("../vendor/autoload.php");
         include_once("../src/libraries/Requests.php");
         Requests::register_autoloader();
     }
@@ -28,7 +29,7 @@ class Hotels
     {
         return $this->api_url = hostname . $this->api_end_point . $route;
     }
-    
+        
     function make_request($data = array(), $options = array(), $headers = array())
     {
         if($this->payload == NULL):
@@ -37,6 +38,16 @@ class Hotels
         
         $data['__payload__'] = $this->payload;
         $options['timeout'] = $this->timeout;
+        $options['useragent'] = @$_SERVER['HTTP_USER_AGENT'];
+        
+        $headers['Accept-Encoding'] = 'gzip, deflate';
+        $headers['isCrawler'] = false;
+
+        $CrawlerDetect = new CrawlerDetect;
+        if($CrawlerDetect->isCrawler()):
+            $headers['Iscrawler'] = $CrawlerDetect->isCrawler();
+            $headers['Crawlername'] = $CrawlerDetect->getMatches();
+        endif;
         
         try 
         {
@@ -116,6 +127,12 @@ class Hotels
     function get_order_info($params = array())
     {
         $this->request_url = $this->get_url('get_order_info')."?".http_build_query($params);
+        return $this->make_request();
+    }
+    
+    function search_booking($params)
+    {
+        $this->request_url = $this->get_url('search_booking')."?".http_build_query($params);
         return $this->make_request();
     }
 }

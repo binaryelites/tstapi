@@ -58,15 +58,20 @@ try {
                 
             </style>
 
-            <div class="container">                
-                <div style="width: 100%; display: table;clear: both">
+            <div class="container">            
+                <small>
+                    <pre>
+                        Profiler: <?=(string)$result->profiler->hotel_info?>
+                    </pre>
+                </small>
+                <div class="col-sm-12 col-xs-12">
                     <img src="<?= $hotelInfo->Image_Banner ?>" style="float:left; width: 200px; height: 130px; margin-right: 10px" />
                     <h3><?= $hotelInfo->Name ?></a></h3>
                     <p><?= $hotelInfo->City_Name ?>, <?= $hotelInfo->Country_Name ?></p>
                     <p><?= $hotelInfo->Address ?></p>
                     <p><?= nl2br($hotelInfo->Description) ?></p>            
                 </div>
-                <div style="width: 100%; display: table;clear: both">
+                <div class="col-sm-12 col-xs-12">
                     <h3>Terms</h3>
                     <?= $hotelInfo->Terms_Conditions ?>
                 </div>
