@@ -25,6 +25,9 @@ include_once 'header.php';
 try {
     $result = simplexml_load_string($request['data']);
     $count = count($result->hotels->item);
+    //set_currency_symbols((string)$result->currency_rates);
+    //var_dump($_currency_rates);
+    //die();
     if($count > 0)
     {
 ?>
@@ -68,7 +71,7 @@ try {
                                     <b><?=$h->Room_Name?></b>
                                 </td>
                                 <td>
-                                    <?=$h->Room_Price?>
+                                    <?=$h->Invoice_Currency?> <?=$h->Room_Price?>
                                     
                                     <?php      
                                     /* very important to set this data here */

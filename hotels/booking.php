@@ -24,15 +24,15 @@ foreach ($room_id_array as $k => $v) {
     if (isset($_POST['quantity'][$v]) && (int) $_POST['quantity'][$v] > 0) {
         $guestInformation = array();
 
-        if(isset($_POST['guest_name']["'title'"]))
+        if(isset($_POST['guest_name']["title"]))
         {            
-            $guestCount = count($_POST['guest_name']["'title'"][$v]);
+            $guestCount = count($_POST['guest_name']["title"][$v]);
             while($guestCount > 0):
                 $guestInformation[$v][] = array(
-                    "title" => $_POST['guest_name']["'title'"][$v][$guestCount],
-                    "first_name" => $_POST['guest_name']["'first_name'"][$v][$guestCount],
-                    "last_name" => $_POST['guest_name']["'last_name'"][$v][$guestCount],
-                    "age" => $_POST['guest_name']["'age'"][$v][$guestCount]
+                    "title" => $_POST['guest_name']["title"][$v][$guestCount],
+                    "first_name" => $_POST['guest_name']["first_name"][$v][$guestCount],
+                    "last_name" => $_POST['guest_name']["last_name"][$v][$guestCount],
+                    "age" => $_POST['guest_name']["age"][$v][$guestCount]
                 );            
                 $guestCount--;
             endwhile;
@@ -65,12 +65,13 @@ $Hotels->timeout = 120;
 
 // Now let's make a booking request!
 $request = $Hotels->book_hotel($bookingData);
-if($request['success'] == false):
+if($request['success'] == false):    
     echo $request['msg'];
     die();
 endif;
 
 try {
+    //$request['data'] = file_get_contents("booking.xml");
     $result = simplexml_load_string($request['data']);
 
     if ($result->success == 0):
@@ -82,7 +83,7 @@ try {
     endif;
     $hotelInfo = $result->hotelInfo;
     $hotelRooms = $result->hotelRooms;
-
+    $Invoice_Currency = (string)$result->invoice_currency;
     
     $order_id = $result->order->ID;
 
@@ -136,7 +137,7 @@ try {
                         </thead>
                         <tr>
                             <td>Prebook Token: <?= (string) $preBookResult->PreBookingToken ?></td>
-                            <td>Total : <?= (float) $preBookResult->TotalPrice ?></td>
+                            <td>Total : <?=$Invoice_Currency?><?= (float) $preBookResult->TotalPrice ?></td>
                         </tr>
                     <?php
                     if (isset($preBookResult->Cancellations) && count($preBookResult->Cancellations->item) > 0):
@@ -155,7 +156,7 @@ try {
                                         EndDate: <?= (string) $c->EndDate ?>
                                     </td>
                                     <td>
-                                        <b>Penalty:</b> <?= (string) $c->Penalty ?>
+                                        <b>Penalty:</b> <?=$Invoice_Currency?><?= (string) $c->Penalty ?>
                                     </td>
                                 </tr>
                             <?php
@@ -225,14 +226,13 @@ try {
                                                 <?= ($r->Max_Adults + $r->Max_Children) ?> x <i class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="<?= addslashes($paxToolTipText) ?>"></i>
                                             </td>
                                             <td>
-                                                Children will cost &euro; <?= $r->Price_Per_Child ?> each
+                                                Children will cost <?=$Invoice_Currency?> <?= $r->Price_Per_Child ?> each
                                             </td>
                                             <td>                                            
                                                 <?= (int) $r->Children ?>
                                             </td>
                                             <td>
-                                                <b>&euro; <?= ((float) $r->Min_Room_Price <= 0) ? $r->Tariff : (float) $r->Min_Room_Price ?></b><br />
-                                                <small>8% vat included</small>
+                                                <b><?=$Invoice_Currency?> <?= ((float) $r->Min_Room_Price <= 0) ? $r->Tariff : (float) $r->Min_Room_Price ?></b><br />                                                
                                             </td>
                                             <td>                                            
                                                 <?= (int) $r->Quantity ?>
@@ -242,7 +242,7 @@ try {
                                             $tcount++;
                                             ?>
                                                 <td rowspan="<?= count($hotelRooms->item) ?>" style="vertical-align: middle">
-                                                    <span id="total_order_price">&euro; <?= $postparams['order_total'] ?></span>                                                        
+                                                    <span id="total_order_price"><?=$Invoice_Currency?> <?= $postparams['order_total'] ?></span>                                                        
                                                 </td>
                                             <?php endif; ?>
                                         </tr>
@@ -341,6 +341,9 @@ try {
                         <hr />
                         
                         <!-- order id -->
+                        <?php if(isset($result->order_items->item[0]->Item_ID)): ?>
+                        <input type="hidden" name="item_id" value="<?=(int)$result->order_items->item[0]->Item_ID?>" />
+                        <?php endif; ?>
                         <input type="hidden" name="order_id" value="<?=$order_id?>" />
                         <input type="hidden" name="__post__" value="<?=$params['__post__']?>" />
                         <!-- order id -->
@@ -398,7 +401,7 @@ try {
                 });
                 
             </script>
-         
+         <textarea style="width: 100%;" rows="10"><?= $request['data'] ?></textarea>
     <?php
     include_once 'footer.php';
 } catch (Exception $ex) {

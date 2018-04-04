@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <success>1</success>
+    <hotelInfo>
+        <Postcode>1210</Postcode>
+        <Fax>+32-2-2011515</Fax>
+        <Latitude>50.8559300000</Latitude>
+        <Longitude>4.3567700000</Longitude>
+        <Owner>jac</Owner>
+        <ID>2394</ID>
+        <Name>Thon Brussels City Centre</Name>
+        <Is_Rating>4.0</Is_Rating>
+        <Hotel_Type_Rating></Hotel_Type_Rating>
+        <Hotel_Rating_Name>4.0</Hotel_Rating_Name>
+        <Image_Banner>http://ivectortestadmin.jactravel.com/Content/DataObjects/ThirdPartyProperty/Image/ext260/image_259711_v1.jpg</Image_Banner>
+        <Address>Avenue du Boulevard 17, </Address>
+        <Country_ID></Country_ID>
+        <City_ID></City_ID>
+        <Country_Name>Belgium</Country_Name>
+        <City_Name>Brussels</City_Name>
+        <Description>Overview\nThon Hotel Brussels City Centre is a 4-star hotel that offers infrastructure in keeping with both the requirements of business travellers and tourist alike. The hotel is located in the Brussels city centre and possesses 17 function rooms of whic</Description>
+        <Coordinates>
+            <lat>50.8559300000</lat>
+            <lng>4.3567700000</lng>
+        </Coordinates>
+        <Terms_Conditions></Terms_Conditions>
+        <Customer_Rating></Customer_Rating>
+        <Total_Reviews></Total_Reviews>
+        <Discount></Discount>
+        <facilities/>
+        <galleryItems/>
+        <reviews/>
+        <hotelRooms/>
+    </hotelInfo>
+    <hotelRooms>
+        <item>
+            <ID>15329</ID>
+            <Seq>15330</Seq>
+            <BookingToken></BookingToken>
+            <MealBasisID>1</MealBasisID>
+            <Adults>2</Adults>
+            <Children>0</Children>
+            <Infants>0</Infants>
+            <SubTotal>63</SubTotal>
+            <Discount>0</Discount>
+            <Total>63</Total>
+            <Name>Room Only Twin</Name>
+            <MealBasis>Room only</MealBasis>
+            <Quantity>1</Quantity>
+            <Min_Room_Price>63</Min_Room_Price>
+            <Tariff>63</Tariff>
+            <Invoice_Currency>$</Invoice_Currency>
+            <Guest_Name><![CDATA[[{"title":"Mr","first_name":"Arif","last_name":"Majid","age":"32"}]]]></Guest_Name>
+        </item>
+    </hotelRooms>
+    <prebookResult>
+        <PreBookingToken>913960#0#913961#</PreBookingToken>
+        <TotalPrice>63</TotalPrice>
+        <TotalCommission>6.3</TotalCommission>
+        <VATOnCommission>0</VATOnCommission>
+        <Cancellations>
+            <item>
+                <StartDate>2018-04-04T00:00:00</StartDate>
+                <EndDate>2018-04-29T00:00:00</EndDate>
+                <Penalty>0</Penalty>
+            </item>
+            <item>
+                <StartDate>2018-04-30T00:00:00</StartDate>
+                <EndDate>2018-04-30T00:00:00</EndDate>
+                <Penalty>22</Penalty>
+            </item>
+            <item>
+                <StartDate>2018-05-01T00:00:00</StartDate>
+                <EndDate>2099-12-31T00:00:00</EndDate>
+                <Penalty>63</Penalty>
+            </item>
+        </Cancellations>
+    </prebookResult>
+    <order>
+        <Owner>jac</Owner>
+        <ID>794963</ID>
+        <User_ID>1</User_ID>
+        <Date_Created>2018-04-04 11:34:20</Date_Created>
+        <Status_ID>incart</Status_ID>
+        <Ip_Address>::1</Ip_Address>
+        <Invoice_Currency>$</Invoice_Currency>
+    </order>
+    <order_items>
+        <item>
+            <Item_ID>312</Item_ID>
+            <Order_ID>794963</Order_ID>
+        </item>
+    </order_items>
+    <invoice_currency>$</invoice_currency>
+    <class>Api_hotel_jac</class>
+    <_config_data_>
+        <site_url>http://localhost/tstnew/</site_url>
+        <image_path>http://localhost/tstnew/assets/public/files/</image_path>
+        <thumb_image_path>http://localhost/tstnew/assets/public/files/thumbs/</thumb_image_path>
+    </_config_data_>
+</result>

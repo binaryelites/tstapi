@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <class>Api_hotel</class>
+    <success>1</success>
+    <order>
+        <ID>794977</ID>
+        <User_ID>1</User_ID>
+        <Date_Created>2018-04-04 13:02:04</Date_Created>
+        <Status_ID>incart</Status_ID>
+        <Ip_Address>::1</Ip_Address>
+    </order>
+    <hotelInfo>
+        <Owner>tst</Owner>
+        <ID>344</ID>
+        <Name>BIANCO RESIDENCE &amp; SUITES HOTEL TAKSIM</Name>
+        <Is_Rating>Budget</Is_Rating>
+        <Hotel_Type_Rating></Hotel_Type_Rating>
+        <Hotel_Rating_Name>Budget</Hotel_Rating_Name>
+        <Image_Banner>http://localhost/tstnew/assets/public/files/Hotel_Image_Banner_1488957903.jpg</Image_Banner>
+        <Address>Şehir Muhtar Mahallesi, Altın Bakkal Sk. No:9, 34435 Beyoğlu/İstanbul BEYOĞLU</Address>
+        <Country_ID></Country_ID>
+        <City_ID></City_ID>
+        <Country_Name>Turkey</Country_Name>
+        <City_Name>Istanbul</City_Name>
+        <Description>DUPLEX AND SUITE APARTMENTS IN TAKSIM SQUARE...</Description>
+        <Coordinates>[{"lat":41.03724465886464,"lng":28.982145799084265}]</Coordinates>
+        <Terms_Conditions>3 DAYS BEFORE ARRIVAL WHOLE CHARGE</Terms_Conditions>
+        <Customer_Rating></Customer_Rating>
+        <Total_Reviews></Total_Reviews>
+        <Discount></Discount>
+        <facilities/>
+        <galleryItems/>
+        <reviews/>
+        <hotelRooms/>
+        <Latitude>41.037244658865</Latitude>
+        <Longitude>28.982145799084</Longitude>
+        <Postcode></Postcode>
+        <Fax></Fax>
+    </hotelInfo>
+    <hotelRooms>
+        <item>
+            <ID>650</ID>
+            <Seq>651</Seq>
+            <BookingToken></BookingToken>
+            <MealBasisID>0</MealBasisID>
+            <Adults>4</Adults>
+            <Children>0</Children>
+            <Infants>0</Infants>
+            <SubTotal>0</SubTotal>
+            <Discount>0</Discount>
+            <Total>35</Total>
+            <Name>Single Room</Name>
+            <MealBasis></MealBasis>
+            <Quantity>1</Quantity>
+            <Min_Room_Price>35</Min_Room_Price>
+            <Tariff>35</Tariff>
+            <Invoice_Currency>€</Invoice_Currency>
+            <Guest_Name><![CDATA[[{"title":"Mr","first_name":"Arif","last_name":"Majid","age":"35"}]]]></Guest_Name>
+        </item>
+    </hotelRooms>
+    <order_items>
+        <item>
+            <Item_ID>326</Item_ID>
+            <Order_ID>794977</Order_ID>
+        </item>
+    </order_items>
+    <invoice_currency>€</invoice_currency>
+    <_config_data_>
+        <site_url>http://localhost/tstnew/</site_url>
+        <image_path>http://localhost/tstnew/assets/public/files/</image_path>
+        <thumb_image_path>http://localhost/tstnew/assets/public/files/thumbs/</thumb_image_path>
+    </_config_data_>
+</result>

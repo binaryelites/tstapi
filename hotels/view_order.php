@@ -9,6 +9,7 @@ $params['order_id'] = $_GET['order_id'];
 
 // Now let's make a booking request!
 $request = $Hotels->get_order_info($params);
+//d($request);
 if($request['success'] == false):
     echo $request['msg'];
     die();
@@ -101,7 +102,7 @@ include_once 'header.php';
                         Infant: <?=(int)$r->Infants?>
                     </td>
                     <td>
-                        <?=(float)$r->Total?>
+                        <?=$r->Base_Currency?><?=(float)$r->Total?>
                     </td>
                     <td>
                         Check In: <?=(string)$r->Check_In?><br />

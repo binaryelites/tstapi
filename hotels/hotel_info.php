@@ -26,6 +26,7 @@ try {
     endif;
     $hotelInfo = $result->hotelInfo;
     $hotelRooms = $result->hotelRooms;    
+    $Invoice_Currency = (string)$result->invoice_currency;
     //d($hotelRooms,false);
     include_once 'header.php';
     ?>
@@ -118,7 +119,7 @@ try {
                                 $rooms = array();
                                 if (isset($result->hotelRooms->item) && count($result->hotelRooms->item)) {
                                     $tcount = 1;
-                                    foreach ($result->hotelRooms->item as $r) {
+                                    foreach ($result->hotelRooms->item as $r) {                                        
                                         $rooms[] = $r;
                                         $availableRoomQuantity += (int) $r->Quantity - (int) $r->Booked_Quantity;
                                         
@@ -143,6 +144,7 @@ try {
                                             "Quantity" => 1,
                                             "Min_Room_Price" => (isset($r->Min_Room_Price) && (float)$r->Min_Room_Price > (float)$r->Tariff) ? (float)$r->Min_Room_Price : (float)$r->Tariff,
                                             "Tariff" => (float)$r->Tariff,
+                                            "Invoice_Currency" => (string)$Invoice_Currency
                                         );
                                         
                                         //we will put this room_data in hidden field
@@ -168,7 +170,7 @@ try {
                                                 x <i class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="<?= addslashes($paxToolTipText) ?>"></i>
                                             </td>
                                             <td>
-                                                Children will cost &euro; <?= $r->Price_Per_Child ?> each
+                                                Children will cost <?=$Invoice_Currency?> <?= $r->Price_Per_Child ?> each
                                             </td>
                                             <td>
                                                 <select class="form-control input-sm" data-rid="<?=$roomIdentifier?>" id="max_children_<?=$roomIdentifier?>" name="max_children[<?=$roomIdentifier?>]" onchange="app.calculateTotalPrice(<?=$roomIdentifier?>);">
@@ -185,7 +187,7 @@ try {
                                                 </select>
                                             </td>
                                             <td>
-                                                <b>&euro; <?= ((float) $r->Min_Room_Price <= 0) ? $r->Tariff : (float) $r->Min_Room_Price ?></b><br />
+                                                <b><?=$Invoice_Currency?> <?= ((float) $r->Min_Room_Price <= 0) ? $r->Tariff : (float) $r->Min_Room_Price ?></b><br />
                                                 <small>8% vat included</small>
                                             </td>
                                             <td>
@@ -213,17 +215,17 @@ try {
                                             if ($tcount == 1):
                                                 $tcount++;
                                                 ?>
-                                                <td rowspan="<?= count($hotelRooms->item) ?>" style="vertical-align: middle">
+                                                <td rowspan="<?= count($hotelRooms->item) + (count($hotelRooms->item)*2) ?>" style="vertical-align: middle">
                                                     <span id="total_order_price"></span>  
                                                     <input type="hidden" value="" name="order_total" id="order_total" />
                                                 </td>
                                             <?php endif; ?>
                                         </tr>
                                         <tr class="bg-success">
-                                            <th colspan="7"><b>Important Data</b></th>                                            
+                                            <th colspan="6"><b>Important Data</b></th>                                            
                                         </tr>
                                         <tr class="bg-info">
-                                            <td colspan="7" style="font-size:11px">                                                
+                                            <td colspan="6" style="font-size:11px">                                                
                                                 <?php
                                                 echo htmlspecialchars_decode((string)$r->Important_Data);
                                                 ?>
@@ -269,28 +271,28 @@ try {
                 <div class="col-sm-3 col-xs-3">
                     <div class="form-group">
                         <label>Guest Title {{counter}}</label>
-                        <input type="text" class="form-control input-sm required" name="guest_name['title'][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
+                        <input type="text" class="form-control input-sm required" name="guest_name[title][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
                         <small>Please give us the title of one of the people staying in this room.</small>
                     </div>    
                 </div>
                 <div class="col-sm-3 col-xs-3">
                     <div class="form-group">
                         <label>Guest First Name {{counter}}</label>
-                        <input type="text" class="form-control input-sm required" name="guest_name['first_name'][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
+                        <input type="text" class="form-control input-sm required" name="guest_name[first_name][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
                         <small>Please give us the fitst name of one of the people staying in this room.</small>
                     </div>    
                 </div>
                 <div class="col-sm-3 col-xs-3">
                     <div class="form-group">
                         <label>Guest Last Name {{counter}}</label>
-                        <input type="text" class="form-control input-sm required" name="guest_name['last_name'][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
+                        <input type="text" class="form-control input-sm required" name="guest_name[last_name][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
                         <small>Please give us the last name of one of the people staying in this room.</small>
                     </div>    
                 </div>
                 <div class="col-sm-3 col-xs-3">
                     <div class="form-group">
                         <label>Guest Age {{counter}}</label>
-                        <input type="number" class="form-control input-sm required" name="guest_name['age'][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
+                        <input type="number" class="form-control input-sm required" name="guest_name[age][{{rid}}][{{counter}}]" id="guest_name_{{rid}}_{{counter}}">
                         <small>Please give us the age of one of the people staying in this room.</small>
                     </div>    
                 </div>
@@ -302,7 +304,7 @@ try {
                 app.hotelInfo = <?= json_encode($hotelInfo) ?>;
                 app.rooms = <?= json_encode($rooms) ?>;
                 app.roomlist = [];
-                app.currency = '&euro;';
+                app.currency = '<?=$Invoice_Currency?>';
                 app.availableRoomQuantity = '<?= $availableRoomQuantity ?>';
                 app.hotelInfoSearchCriteria = <?=json_encode($params)?>;
                 

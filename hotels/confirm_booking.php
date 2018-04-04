@@ -8,13 +8,14 @@ $Hotels->timeout = 120;
 $post = $_POST;
 $params = array(    
     "order_id" => $post['order_id'],
+    "item_id" => $post['item_id'],
     "guest" => $post['guest'],
     "__post__" => $post['__post__']
 );
 
 // Now let's make a request!
 $request = $Hotels->confirm_booking($params);
-
+//d($request);
 try {    
     $result = simplexml_load_string($request['data']);
     echo json_encode($result);
